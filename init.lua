@@ -198,14 +198,16 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Easy terminal split keymaps
-vim.keymap.set('n', '<leader>ts', ':split | resize 20 | terminal<CR>', { desc = '[T]erminal [S]plit horizontal' })
-vim.keymap.set('n', '<leader>tv', ':vsplit | vertical resize 40 | terminal<CR>', { desc = '[T]erminal [S]plit vertical' })
+vim.keymap.set('n', '<leader>ts', ':split | terminal<CR>', { desc = '[T]erminal [S]plit horizontal' })
+vim.keymap.set('n', '<leader>tv', ':vsplit | terminal<CR>', { desc = '[T]erminal [S]plit vertical' })
 
 --Open config file
 vim.keymap.set('n', '<leader>en', function()
   vim.cmd.edit(vim.fn.stdpath('config'))
 end, { desc = ' [E]dit [N]vim config' })
 
+--Open file explorer
+vim.keymap.set('n', '<leader>ex', ':Lex %:h<CR>', { desc = 'Open [EX]plorer in current dir' })
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -624,6 +626,8 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
 
+        jsonls = {},
+
         stylua = {}, -- Used to format Lua code
 
         -- Special Lua Config, as recommended by neovim help docs
@@ -671,6 +675,8 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         -- You can add other tools here that you want Mason to install
+        'lua-language-server',
+        'stylua',
       })
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
