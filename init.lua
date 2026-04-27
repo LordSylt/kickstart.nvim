@@ -98,6 +98,11 @@ vim.g.have_nerd_font = false
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+
+
 -- Make line numbers default
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -198,8 +203,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Easy terminal split keymaps
-vim.keymap.set('n', '<leader>ts', ':split | terminal<CR>', { desc = '[T]erminal [S]plit horizontal' })
-vim.keymap.set('n', '<leader>tv', ':vsplit | terminal<CR>', { desc = '[T]erminal [S]plit vertical' })
+vim.keymap.set('n', '<leader>ts', ':lcd %:p:h | :split | terminal<CR>', { desc = '[T]erminal [S]plit horizontal' })
+vim.keymap.set('n', '<leader>tv', ':lcd %:p:h | :vsplit | terminal<CR>', { desc = '[T]erminal [S]plit vertical' })
 
 --Open config file
 vim.keymap.set('n', '<leader>en', function()
@@ -625,6 +630,7 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
+        intelephense = {},
 
         jsonls = {},
 
@@ -969,7 +975,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommended keymaps
 
@@ -1007,3 +1013,5 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+
