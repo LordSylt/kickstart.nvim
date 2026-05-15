@@ -338,7 +338,7 @@ require('lazy').setup({
       spec = {
         { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
         { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
+        { '<leader>h', group = 'git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
         { '<leader>f', group = '[F]uzzy finder', mode = { 'n', 'v' } },
         { '<leader>g', group = '[G]it' },
         { 'gr', group = 'LSP Actions', mode = { 'n' } },
@@ -998,7 +998,7 @@ require('lazy').setup({
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       local harpoon = require('harpoon')
-      harpoon:setup()
+      harpoon:setup({ settings = { sync_on_ui_close = true, save_on_toggle = true, } })
 
       vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end, { desc = 'Harpoon [A]dd file' })
       vim.keymap.set('n', '<C-e>', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = 'Harpoon menu' })
