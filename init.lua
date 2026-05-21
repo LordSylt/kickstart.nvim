@@ -208,7 +208,7 @@ vim.keymap.set('n', '<leader>tv', ':lcd %:p:h | :vsplit | terminal<CR>', { desc 
 
 --Open config file
 vim.keymap.set('n', '<leader>en', function()
-  vim.cmd.edit(vim.fn.stdpath('config'))
+  vim.cmd.edit(vim.fn.stdpath('config') .. '/init.lua')
 end, { desc = ' [E]dit [N]vim config' })
 
 --Open file explorer
@@ -634,6 +634,10 @@ require('lazy').setup({
         -- ts_ls = {},
         intelephense = {},
 
+        ts_ls = {},
+
+        eslint = {},
+
         jsonls = {},
 
         stylua = {}, -- Used to format Lua code
@@ -795,6 +799,7 @@ require('lazy').setup({
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
         preset = 'default',
+        ['<Tab>'] = { 'accept', 'fallback' },
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -916,7 +921,7 @@ require('lazy').setup({
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
     config = function()
       -- ensure basic parser are installed
-      local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+      local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'tsx', 'typescript', }
       require('nvim-treesitter').install(parsers)
 
       ---@param buf integer
