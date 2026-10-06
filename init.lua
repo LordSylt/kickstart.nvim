@@ -1035,12 +1035,22 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>gp', function() vim.cmd.Git('push') end, { desc = '[G]it [P]ush' })
       vim.keymap.set('n', '<leader>gl', function() vim.cmd.Git('pull') end, { desc = '[G]it [P]ull' })
       vim.keymap.set('n', '<leader>gb', function() vim.cmd.Git('blame') end, { desc = '[G]it [B]lame' })
-      vim.keymap.set('n', '<leader>gd', vim.cmd.Gdiffsplit, { desc = '[G]it [D]iff' })
+      vim.keymap.set('n', '<leader>gd', function()
+        vim.cmd('Gvdiffsplit!')
+        vim.cmd('wincmd J')  -- cursor starts in the working copy; push it to the bottom, full width
+      end, { desc = '[G]it [D]iff (3-way, result on bottom)' })
       vim.keymap.set('n', '<leader>gc', function() vim.cmd.Git('commit') end, { desc = '[G]it [C]ommit' })
       vim.keymap.set('n', '<leader>gm', function() vim.cmd.Git('mergetool') end, { desc = '[G]it [M]ergetool' })
     end,
   },
+  -- Merge conflict navigation
+    vim.keymap.set('n', ']x', ']c', { desc = 'Next conflict' }),
+    vim.keymap.set('n', '[x', '[c', { desc = 'Previous conflict' }),
 
+    vim.keymap.set('n', '<leader>co', '<cmd>diffget //2<CR>', { desc = 'Conflict: choose ours (target)' }),
+    vim.keymap.set('n', '<leader>ct', '<cmd>diffget //3<CR>', { desc = 'Conflict: choose theirs (merge)' }),
+
+    vim.keymap.set('n', '<leader>gw', '<cmd>Gwrite<CR>', { desc = 'Git stage current file' }),
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
